@@ -1,0 +1,240 @@
+Help on class STT in module livekit.plugins.sarvam.stt:
+
+class STT(livekit.agents.stt.stt.STT)
+ |  STT(*, language: 'str' = 'en-IN', model: 'SarvamSTTModels | str' = 'saarika:v2.5', mode: 'SarvamSTTModes | str' = 'transcribe', api_key: 'str | None' = None, base_url: 'str | None' = None, http_session: 'aiohttp.ClientSession | None' = None, prompt: 'str | None' = None, high_vad_sensitivity: 'bool | None' = None, sample_rate: 'int' = 16000, flush_signal: 'bool | None' = None, input_audio_codec: 'str | None' = None) -> 'None'
+ |  
+ |  Sarvam.ai Speech-to-Text implementation.
+ |  
+ |  This class provides speech-to-text functionality using the Sarvam.ai API.
+ |  Sarvam.ai specializes in high-quality STT for Indian languages.
+ |  
+ |  Args:
+ |      language: BCP-47 language code, e.g., "hi-IN", "en-IN"
+ |      model: The Sarvam STT model to use
+ |      mode: Mode for saaras:v3 (transcribe/translate/verbatim/translit/codemix)
+ |      api_key: Sarvam.ai API key (falls back to SARVAM_API_KEY env var)
+ |      base_url: API endpoint URL
+ |      http_session: Optional aiohttp session to use
+ |      prompt: Optional prompt for STT translate (saaras models only)
+ |  
+ |  Method resolution order:
+ |      STT
+ |      livekit.agents.stt.stt.STT
+ |      abc.ABC
+ |      livekit.rtc.event_emitter.EventEmitter
+ |      typing.Generic
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, *, language: 'str' = 'en-IN', model: 'SarvamSTTModels | str' = 'saarika:v2.5', mode: 'SarvamSTTModes | str' = 'transcribe', api_key: 'str | None' = None, base_url: 'str | None' = None, http_session: 'aiohttp.ClientSession | None' = None, prompt: 'str | None' = None, high_vad_sensitivity: 'bool | None' = None, sample_rate: 'int' = 16000, flush_signal: 'bool | None' = None, input_audio_codec: 'str | None' = None) -> 'None'
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |  
+ |  stream(self, *, language: 'NotGivenOr[str]' = NOT_GIVEN, model: 'NotGivenOr[SarvamSTTModels | str]' = NOT_GIVEN, mode: 'NotGivenOr[SarvamSTTModes | str]' = NOT_GIVEN, conn_options: 'APIConnectOptions' = APIConnectOptions(max_retry=3, retry_interval=2.0, timeout=10.0), prompt: 'NotGivenOr[str]' = NOT_GIVEN, high_vad_sensitivity: 'NotGivenOr[bool]' = NOT_GIVEN, sample_rate: 'NotGivenOr[int]' = NOT_GIVEN, flush_signal: 'NotGivenOr[bool]' = NOT_GIVEN, input_audio_codec: 'NotGivenOr[str]' = NOT_GIVEN) -> 'SpeechStream'
+ |      Create a streaming transcription session.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |  
+ |  model
+ |      Get the model name/identifier for this STT instance.
+ |      
+ |      Returns:
+ |          The model name if available, "unknown" otherwise.
+ |      
+ |      Note:
+ |          Plugins should override this property to provide their model information.
+ |  
+ |  provider
+ |      Get the provider name/identifier for this STT instance.
+ |      
+ |      Returns:
+ |          The provider name if available, "unknown" otherwise.
+ |      
+ |      Note:
+ |          Plugins should override this property to provide their provider information.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __abstractmethods__ = frozenset()
+ |  
+ |  __parameters__ = ()
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from livekit.agents.stt.stt.STT:
+ |  
+ |  async __aenter__(self) -> 'STT'
+ |  
+ |  async __aexit__(self, exc_type: 'type[BaseException] | None', exc: 'BaseException | None', exc_tb: 'TracebackType | None') -> 'None'
+ |  
+ |  async aclose(self) -> 'None'
+ |      Close the STT, and every stream/requests associated with it
+ |  
+ |  prewarm(self) -> 'None'
+ |      Pre-warm connection to the STT service
+ |  
+ |  async recognize(self, buffer: 'AudioBuffer', *, language: 'NotGivenOr[str]' = NOT_GIVEN, conn_options: 'APIConnectOptions' = APIConnectOptions(max_retry=3, retry_interval=2.0, timeout=10.0)) -> 'SpeechEvent'
+ |  
+ |  ----------------------------------------------------------------------
+ |  Readonly properties inherited from livekit.agents.stt.stt.STT:
+ |  
+ |  capabilities
+ |  
+ |  label
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from livekit.agents.stt.stt.STT:
+ |  
+ |  __dict__
+ |      dictionary for instance variables
+ |  
+ |  __weakref__
+ |      list of weak references to the object
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from livekit.agents.stt.stt.STT:
+ |  
+ |  __orig_bases__ = (<class 'abc.ABC'>, livekit.rtc.event_emitter.EventEm...
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from livekit.rtc.event_emitter.EventEmitter:
+ |  
+ |  emit(self, event: -T_contra, *args) -> None
+ |      Trigger all callbacks associated with the given event.
+ |      
+ |      Args:
+ |          event (T): The event to emit.
+ |          *args: Positional arguments to pass to the callbacks.
+ |      
+ |      Example:
+ |          Basic usage of emit:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.on('greet', greet)
+ |          emitter.emit('greet', 'Alice')  # Output: Hello, Alice!
+ |          ```
+ |  
+ |  off(self, event: -T_contra, callback: Callable) -> None
+ |      Unregister a callback from an event.
+ |      
+ |      Args:
+ |          event (T): The event to stop listening to.
+ |          callback (Callable): The callback to remove.
+ |      
+ |      Example:
+ |          Removing a callback:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.on('greet', greet)
+ |          emitter.off('greet', greet)
+ |          emitter.emit('greet', 'Dave')  # No output, callback was removed
+ |          ```
+ |  
+ |  on(self, event: -T_contra, callback: Optional[Callable] = None) -> Callable
+ |      Register a callback to be called whenever the event is emitted.
+ |      
+ |      If a callback is provided, it registers the callback directly.
+ |      If no callback is provided, it returns a decorator for use with function definitions.
+ |      
+ |      Args:
+ |          event (T): The event to listen for.
+ |          callback (Callable, optional): The callback to register. Defaults to None.
+ |      
+ |      Returns:
+ |          Callable: The registered callback or a decorator if callback is None.
+ |      
+ |      Example:
+ |          Using on with a direct callback:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.on('greet', greet)
+ |          emitter.emit('greet', 'Charlie')  # Output: Hello, Charlie!
+ |          ```
+ |      
+ |          Using on as a decorator:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          @emitter.on('greet')
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.emit('greet', 'Charlie')  # Output: Hello, Charlie!
+ |          ```
+ |  
+ |  once(self, event: -T_contra, callback: Optional[Callable] = None) -> Callable
+ |      Register a callback to be called only once when the event is emitted.
+ |      
+ |      If a callback is provided, it registers the callback directly.
+ |      If no callback is provided, it returns a decorator for use with function definitions.
+ |      
+ |      Args:
+ |          event (T): The event to listen for.
+ |          callback (Callable, optional): The callback to register. Defaults to None.
+ |      
+ |      Returns:
+ |          Callable: The registered callback or a decorator if callback is None.
+ |      
+ |      Example:
+ |          Using once with a direct callback:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet_once(name):
+ |              print(f"Hello once, {name}!")
+ |      
+ |          emitter.once('greet', greet_once)
+ |          emitter.emit('greet', 'Bob')    # Output: Hello once, Bob!
+ |          emitter.emit('greet', 'Bob')    # No output, callback was removed after first call
+ |          ```
+ |      
+ |          Using once as a decorator:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          @emitter.once('greet')
+ |          def greet_once(name):
+ |              print(f"Hello once, {name}!")
+ |      
+ |          emitter.emit('greet', 'Bob')    # Output: Hello once, Bob!
+ |          emitter.emit('greet', 'Bob')    # No output
+ |          ```
+ |  
+ |  ----------------------------------------------------------------------
+ |  Class methods inherited from typing.Generic:
+ |  
+ |  __class_getitem__(params) from abc.ABCMeta
+ |      Parameterizes a generic class.
+ |      
+ |      At least, parameterizing a generic class is the *main* thing this method
+ |      does. For example, for some generic class `Foo`, this is called when we
+ |      do `Foo[int]` - there, with `cls=Foo` and `params=int`.
+ |      
+ |      However, note that this method is also called when defining generic
+ |      classes in the first place with `class Foo(Generic[T]): ...`.
+ |  
+ |  __init_subclass__(*args, **kwargs) from abc.ABCMeta
+ |      This method is called when a class is subclassed.
+ |      
+ |      The default implementation does nothing. It may be
+ |      overridden to extend subclasses.
+

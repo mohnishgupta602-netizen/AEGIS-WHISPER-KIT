@@ -1,0 +1,188 @@
+Help on class STT in module livekit.agents.stt.stt:
+
+class STT(abc.ABC, livekit.rtc.event_emitter.EventEmitter)
+ |  STT(*, capabilities: 'STTCapabilities') -> 'None'
+ |  
+ |  Method resolution order:
+ |      STT
+ |      abc.ABC
+ |      livekit.rtc.event_emitter.EventEmitter
+ |      typing.Generic
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(self, *, capabilities: 'STTCapabilities') -> 'None'
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |  
+ |  async aclose(self) -> 'None'
+ |      Close the STT, and every stream/requests associated with it
+ |  
+ |  async recognize(self, buffer: 'AudioBuffer', *, language: 'str | None' = None) -> 'SpeechEvent'
+ |  
+ |  stream(self, *, language: 'str | None' = None) -> "'SpeechStream'"
+ |  
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |  
+ |  capabilities
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  __dict__
+ |      dictionary for instance variables
+ |  
+ |  __weakref__
+ |      list of weak references to the object
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |  
+ |  __abstractmethods__ = frozenset({'_recognize_impl'})
+ |  
+ |  __orig_bases__ = (<class 'abc.ABC'>, livekit.rtc.event_emitter.EventEm...
+ |  
+ |  __parameters__ = ()
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from livekit.rtc.event_emitter.EventEmitter:
+ |  
+ |  emit(self, event: -T_contra, *args) -> None
+ |      Trigger all callbacks associated with the given event.
+ |      
+ |      Args:
+ |          event (T): The event to emit.
+ |          *args: Positional arguments to pass to the callbacks.
+ |      
+ |      Example:
+ |          Basic usage of emit:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.on('greet', greet)
+ |          emitter.emit('greet', 'Alice')  # Output: Hello, Alice!
+ |          ```
+ |  
+ |  off(self, event: -T_contra, callback: Callable) -> None
+ |      Unregister a callback from an event.
+ |      
+ |      Args:
+ |          event (T): The event to stop listening to.
+ |          callback (Callable): The callback to remove.
+ |      
+ |      Example:
+ |          Removing a callback:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.on('greet', greet)
+ |          emitter.off('greet', greet)
+ |          emitter.emit('greet', 'Dave')  # No output, callback was removed
+ |          ```
+ |  
+ |  on(self, event: -T_contra, callback: Optional[Callable] = None) -> Callable
+ |      Register a callback to be called whenever the event is emitted.
+ |      
+ |      If a callback is provided, it registers the callback directly.
+ |      If no callback is provided, it returns a decorator for use with function definitions.
+ |      
+ |      Args:
+ |          event (T): The event to listen for.
+ |          callback (Callable, optional): The callback to register. Defaults to None.
+ |      
+ |      Returns:
+ |          Callable: The registered callback or a decorator if callback is None.
+ |      
+ |      Example:
+ |          Using on with a direct callback:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.on('greet', greet)
+ |          emitter.emit('greet', 'Charlie')  # Output: Hello, Charlie!
+ |          ```
+ |      
+ |          Using on as a decorator:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          @emitter.on('greet')
+ |          def greet(name):
+ |              print(f"Hello, {name}!")
+ |      
+ |          emitter.emit('greet', 'Charlie')  # Output: Hello, Charlie!
+ |          ```
+ |  
+ |  once(self, event: -T_contra, callback: Optional[Callable] = None) -> Callable
+ |      Register a callback to be called only once when the event is emitted.
+ |      
+ |      If a callback is provided, it registers the callback directly.
+ |      If no callback is provided, it returns a decorator for use with function definitions.
+ |      
+ |      Args:
+ |          event (T): The event to listen for.
+ |          callback (Callable, optional): The callback to register. Defaults to None.
+ |      
+ |      Returns:
+ |          Callable: The registered callback or a decorator if callback is None.
+ |      
+ |      Example:
+ |          Using once with a direct callback:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          def greet_once(name):
+ |              print(f"Hello once, {name}!")
+ |      
+ |          emitter.once('greet', greet_once)
+ |          emitter.emit('greet', 'Bob')    # Output: Hello once, Bob!
+ |          emitter.emit('greet', 'Bob')    # No output, callback was removed after first call
+ |          ```
+ |      
+ |          Using once as a decorator:
+ |      
+ |          ```python
+ |          emitter = EventEmitter[str]()
+ |      
+ |          @emitter.once('greet')
+ |          def greet_once(name):
+ |              print(f"Hello once, {name}!")
+ |      
+ |          emitter.emit('greet', 'Bob')    # Output: Hello once, Bob!
+ |          emitter.emit('greet', 'Bob')    # No output
+ |          ```
+ |  
+ |  ----------------------------------------------------------------------
+ |  Class methods inherited from typing.Generic:
+ |  
+ |  __class_getitem__(params) from abc.ABCMeta
+ |      Parameterizes a generic class.
+ |      
+ |      At least, parameterizing a generic class is the *main* thing this method
+ |      does. For example, for some generic class `Foo`, this is called when we
+ |      do `Foo[int]` - there, with `cls=Foo` and `params=int`.
+ |      
+ |      However, note that this method is also called when defining generic
+ |      classes in the first place with `class Foo(Generic[T]): ...`.
+ |  
+ |  __init_subclass__(*args, **kwargs) from abc.ABCMeta
+ |      This method is called when a class is subclassed.
+ |      
+ |      The default implementation does nothing. It may be
+ |      overridden to extend subclasses.
+

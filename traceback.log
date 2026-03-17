@@ -1,0 +1,53 @@
++- Traceback (most recent call last) --+
+| C:\Users\MOHIT\AppData\Local\Program |
+| s\Python\Python311\Lib\site-packages |
+| \livekit\agents\cli\cli.py:1751 in   |
+| start                                |
+|                                      |
+|   1748         if drain_timeout is n |
+|   1749             server.update_opt |
+|   1750                               |
+| \u2771 1751         _run_worker(          |
+|   1752             server=server,    |
+|   1753             args=proto.CliArg |
+|   1754                 log_level=log |
+|                                      |
+| C:\Users\MOHIT\AppData\Local\Program |
+| s\Python\Python311\Lib\site-packages |
+| \livekit\agents\cli\cli.py:1626 in   |
+| _run_worker                          |
+|                                      |
+|   1623             if not args.devmo |
+|   1624                 loop.run_unti |
+|   1625                               |
+| \u2771 1626             loop.run_until_co |
+|   1627                               |
+|   1628             if watch_client:  |
+|   1629                 loop.run_unti |
+|                                      |
+| C:\Users\MOHIT\AppData\Local\Program |
+| s\Python\Python311\Lib\asyncio\base_ |
+| events.py:653 in run_until_complete  |
+|                                      |
+|    650         if not future.done(): |
+|    651             raise RuntimeErro |
+|    652                               |
+| \u2771  653         return future.result( |
+|    654                               |
+|    655     def stop(self):           |
+|    656         """Stop running the e |
+|                                      |
+| C:\Users\MOHIT\AppData\Local\Program |
+| s\Python\Python311\Lib\site-packages |
+| \livekit\agents\worker.py:892 in     |
+| aclose                               |
+|                                      |
+|    889                               |
+|    890             logger.info("shut |
+|    891                               |
+| \u2771  892             assert self._clos |
+|    893             assert self._http |
+|    894             assert self._api  |
+|    895             assert self._http |
++--------------------------------------+
+AssertionError
